@@ -63,9 +63,9 @@ namespace _SPEED__EWalletSample.Models
     {
         public string txnId { get; set; }
         public string merchantCode { get; set; }
-        public string terminalId { get; set; }
+        public string terminalID { get; set; }
         public string payDate{ get; set; }
-        public string checksum { get; set; }
+        public string checkSum { get; set; }
     }
 
     public class VNPayResponseQr
@@ -73,7 +73,7 @@ namespace _SPEED__EWalletSample.Models
         public string code { get; set; }
         public string message { get; set; }
         public string data { get; set; }
-        public string checksum { get; set; }
+        public string checkSum { get; set; }
         public string idQrcode { get; set; }
     }
 }

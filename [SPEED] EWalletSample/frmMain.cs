@@ -328,7 +328,7 @@ namespace _SPEED__EWalletSample
                 {
                     txnId = Transact,
                     merchantCode = _Config.merchantCode,
-                    terminalId = _Config.terminalId,
+                    terminalID = _Config.terminalId,
                     payDate = DateTime.Now.ToString("dd/MM/yyyy"),
 
                 };
@@ -336,10 +336,10 @@ namespace _SPEED__EWalletSample
                 string rawHash = _VNPayRequestCheckTrans.payDate + "|" +
                     _VNPayRequestCheckTrans.txnId + "|" +
                     _VNPayRequestCheckTrans.merchantCode + "|" +
-                    _VNPayRequestCheckTrans.terminalId + "|" +
+                    _VNPayRequestCheckTrans.terminalID + "|" +
                     _Config.checkTransactionSecretKey;
 
-                _VNPayRequestCheckTrans.checksum = CreateMD5(rawHash);
+                _VNPayRequestCheckTrans.checkSum = CreateMD5(rawHash);
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(_Config.url + "/CheckTransaction/rest/api/CheckTrans");
 
                 httpWebRequest.ContentType = "application/json";

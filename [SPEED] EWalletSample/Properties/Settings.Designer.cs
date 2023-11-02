@@ -39,7 +39,7 @@ namespace _SPEED__EWalletSample.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"{""url"":""http://14.160.87.123:18080"",""createQrcodeSecretKey"":""vnpay@MERCHANT"",""checkTransactionSecretKey"":""vnpay@123"",""appId"":""MERCHANT"",""merchantName"":""SPEED JSC"",""serviceCode"":""03"",""countryCode"":""VN"",""masterMerCode"":""A000000775"",""merchantType"":""5045"",""merchantCode"":""0305066541"",""terminalId"":""SPEED001"",""payType"":""03"",""ccy"":""704"",""expMin"":""30"",""productId"":""""}")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"{""url"":""http://14.160.87.123:18080"",""createQrcodeSecretKey"":""vnpay@MERCHANT"",""checkTransactionSecretKey"":""vnpay@123"",""appId"":""MERCHANT"",""merchantName"":""VNPAYQRTEST"",""serviceCode"":""03"",""countryCode"":""VN"",""masterMerCode"":""A000000775"",""merchantType"":""0742"",""merchantCode"":""VNPAYQR117"",""terminalId"":""VNPAYQR2"",""payType"":""03"",""ccy"":""704"",""expMin"":""30"",""productId"":""""}")]
         public string VNPay {
             get {
                 return ((string)(this["VNPay"]));

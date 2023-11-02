@@ -364,6 +364,11 @@ namespace _SPEED__EWalletSample
                         txtStatus.Text = "                 Payment success";
                         tmrCountDown.Stop();
                     }
+                    else
+                    {
+                        countInv = Convert.ToInt32(Configuration.getConfig["TimeCheck"]);
+                        tmrCountDown.Start();
+                    }
 
                 }
             }

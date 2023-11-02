@@ -1,0 +1,11 @@
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\[SPEED] EWalletSample.exe
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\[SPEED] EWalletSample.pdb
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\obj\Debug\[SPEED] EWalletSample.csprojResolveAssemblyReference.cache
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\obj\Debug\_SPEED__EWalletSample.frmMain.resources
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\obj\Debug\_SPEED__EWalletSample.Properties.Resources.resources
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\obj\Debug\[SPEED] EWalletSample.csproj.GenerateResource.Cache
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\obj\Debug\[SPEED] EWalletSample.exe
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\obj\Debug\[SPEED] EWalletSample.pdb
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\[SPEED] EWalletSample.exe.config
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Newtonsoft.Json.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\QRCoder.dll

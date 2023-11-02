@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="_SPEED__EWalletSample.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Momo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{"sandbox":"https://test-payment.momo.vn","production":"https://payment.momo.vn","partnerCode":"MOMO","accessKey":"F8BBA842ECF85","secretkey":"K951B6PE1waDMi640xX08PD3vg6EkVlz"}</Value>
+    </Setting>
+    <Setting Name="VNPay" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{"url":"http://14.160.87.123:18080","createQrcodeSecretKey":"vnpay@MERCHANT","checkTransactionSecretKey":"vnpay@123","appId":"MERCHANT","merchantName":"SPEED JSC","serviceCode":"03","countryCode":"VN","masterMerCode":"A000000775","merchantType":"5045","merchantCode":"0305066541","terminalId":"SPEED001","payType":"03","ccy":"704","expMin":"30","productId":""}</Value>
+    </Setting>
+    <Setting Name="ZaloPay" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{"url":"https://sandbox.zalopay.com.vn","appId":"15062","macKey":"qk3f6zw5bbyCeP3Chp47SS1ZRiO0Vuyn","callbackKey":"fNfVlVR9AzjMrrkUSXuGorWZVSUwrGIQ","rsaKey":"PFJTQUtleVZhbHVlPjxNb2R1bHVzPmpwakV4bW1nQzI3Q3RtdlJKTWRYTW5WSzhaTjNSRjlGYmxEdUpCQ2lDWWVobFJGM08wSnNsMEQrREU5OFBsbThiZFcwVFFYNHJFWnhNTlhUWjBTQTdRPT08L01vZHVsdXM+PEV4cG9uZW50PkFRQUI8L0V4cG9uZW50PjwvUlNBS2V5VmFsdWU+"}</Value>
+    </Setting>
+    <Setting Name="WSPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">9000</Value>
+    </Setting>
+    <Setting Name="ECCLevel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="QRLogoSize" Type="System.String" Scope="User">
+      <Value Profile="(Default)">32</Value>
+    </Setting>
+    <Setting Name="PixelsPerModule" Type="System.String" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="ResizeMax" Type="System.String" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="TimeCheck" Type="System.String" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

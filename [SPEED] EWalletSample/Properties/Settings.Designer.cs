@@ -25,111 +25,181 @@ namespace _SPEED__EWalletSample.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("{\"sandbox\":\"https://test-payment.momo.vn\",\"production\":\"https://payment.momo.vn\"," +
-            "\"partnerCode\":\"MOMO\",\"accessKey\":\"F8BBA842ECF85\",\"secretkey\":\"K951B6PE1waDMi640x" +
-            "X08PD3vg6EkVlz\"}")]
-        public string Momo {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string bankCode {
             get {
-                return ((string)(this["Momo"]));
+                return ((string)(this["bankCode"]));
             }
             set {
-                this["Momo"] = value;
+                this["bankCode"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"{""url"":""http://14.160.87.123:18080"",""createQrcodeSecretKey"":""vnpay@MERCHANT"",""checkTransactionSecretKey"":""vnpay@123"",""appId"":""MERCHANT"",""merchantName"":""VNPAYQRTEST"",""serviceCode"":""03"",""countryCode"":""VN"",""masterMerCode"":""A000000775"",""merchantType"":""0742"",""merchantCode"":""VNPAYQR117"",""terminalId"":""VNPAYQR2"",""payType"":""03"",""ccy"":""704"",""expMin"":""30"",""productId"":""""}")]
-        public string VNPay {
+        [global::System.Configuration.DefaultSettingValueAttribute("en")]
+        public string language {
             get {
-                return ((string)(this["VNPay"]));
+                return ((string)(this["language"]));
             }
             set {
-                this["VNPay"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"{""url"":""https://sandbox.zalopay.com.vn"",""appId"":""15062"",""macKey"":""qk3f6zw5bbyCeP3Chp47SS1ZRiO0Vuyn"",""callbackKey"":""fNfVlVR9AzjMrrkUSXuGorWZVSUwrGIQ"",""rsaKey"":""PFJTQUtleVZhbHVlPjxNb2R1bHVzPmpwakV4bW1nQzI3Q3RtdlJKTWRYTW5WSzhaTjNSRjlGYmxEdUpCQ2lDWWVobFJGM08wSnNsMEQrREU5OFBsbThiZFcwVFFYNHJFWnhNTlhUWjBTQTdRPT08L01vZHVsdXM+PEV4cG9uZW50PkFRQUI8L0V4cG9uZW50PjwvUlNBS2V5VmFsdWU+""}")]
-        public string ZaloPay {
-            get {
-                return ((string)(this["ZaloPay"]));
-            }
-            set {
-                this["ZaloPay"] = value;
+                this["language"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("9000")]
-        public string WSPort {
+        public string wsPort {
             get {
-                return ((string)(this["WSPort"]));
+                return ((string)(this["wsPort"]));
             }
             set {
-                this["WSPort"] = value;
+                this["wsPort"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public string ECCLevel {
+        public string eccLevel {
             get {
-                return ((string)(this["ECCLevel"]));
+                return ((string)(this["eccLevel"]));
             }
             set {
-                this["ECCLevel"] = value;
+                this["eccLevel"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("32")]
-        public string QRLogoSize {
+        public string qrLogoSize {
             get {
-                return ((string)(this["QRLogoSize"]));
+                return ((string)(this["qrLogoSize"]));
             }
             set {
-                this["QRLogoSize"] = value;
+                this["qrLogoSize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public string PixelsPerModule {
+        public string pixelsPerModule {
             get {
-                return ((string)(this["PixelsPerModule"]));
+                return ((string)(this["pixelsPerModule"]));
             }
             set {
-                this["PixelsPerModule"] = value;
+                this["pixelsPerModule"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("200")]
-        public string ResizeMax {
+        public string resizeMax {
             get {
-                return ((string)(this["ResizeMax"]));
+                return ((string)(this["resizeMax"]));
             }
             set {
-                this["ResizeMax"] = value;
+                this["resizeMax"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public string TimeCheck {
+        [global::System.Configuration.DefaultSettingValueAttribute("2839")]
+        public string zalopayPayCode {
             get {
-                return ((string)(this["TimeCheck"]));
+                return ((string)(this["zalopayPayCode"]));
             }
             set {
-                this["TimeCheck"] = value;
+                this["zalopayPayCode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VNPAY_TEST")]
+        public string vnpayPayCode {
+            get {
+                return ((string)(this["vnpayPayCode"]));
+            }
+            set {
+                this["vnpayPayCode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("MOMO77C020230530")]
+        public string momoPayCode {
+            get {
+                return ((string)(this["momoPayCode"]));
+            }
+            set {
+                this["momoPayCode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("sco-project-user-01")]
+        public string identifier {
+            get {
+                return ((string)(this["identifier"]));
+            }
+            set {
+                this["identifier"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("sha256")]
+        public string authMethod {
+            get {
+                return ((string)(this["authMethod"]));
+            }
+            set {
+                this["authMethod"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("qr")]
+        public string paygateMethod {
+            get {
+                return ((string)(this["paygateMethod"]));
+            }
+            set {
+                this["paygateMethod"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("IjsLFBnUnPXLViFJUOPPXgagvVNPfYvL")]
+        public string secretKey {
+            get {
+                return ((string)(this["secretKey"]));
+            }
+            set {
+                this["secretKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://qas.centralretail.com.vn")]
+        public string url {
+            get {
+                return ((string)(this["url"]));
+            }
+            set {
+                this["url"] = value;
             }
         }
     }

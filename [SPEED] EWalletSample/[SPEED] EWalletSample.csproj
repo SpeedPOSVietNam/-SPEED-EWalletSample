@@ -58,9 +58,10 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Momo.cs" />
+    <Compile Include="Models\QrTransaction.cs" />
     <Compile Include="Models\VNPay.cs" />
     <Compile Include="Models\ZaloPay.cs" />
+    <Compile Include="PaymentMethod.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMain.resx">

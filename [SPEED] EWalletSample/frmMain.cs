@@ -9,8 +9,10 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -32,7 +34,7 @@ namespace _SPEED__EWalletSample
         int indexWallet = 0;
         string Transact = "";
         string Amount = "";
-        string Descript = "";
+        string MethodPay = "";
         public frmMain()
         {
             Application.EnableVisualStyles();
@@ -43,20 +45,22 @@ namespace _SPEED__EWalletSample
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+
             Configuration.InitConfig();
 
-            string[] wallet = { "Momo", "VNPay" };
+            string[] wallet = { PaymentMethod.Momo.ToString(), PaymentMethod.VNPay.ToString(), PaymentMethod.ZaloPay.ToString() };
 
             foreach (string item in wallet)
             {
-                cbWallet.Items.Add(item);
+                cbWallet.Items.Add(item.ToUpper());
             }
             cbWallet.SelectedIndex = indexWallet;
+
             if (!isRunning)
             {
                 isAccept = true;
                 isReceive = true;
-                ipe = new IPEndPoint(IPAddress.Any, int.Parse(Configuration.getConfig["WSPort"]));
+                ipe = new IPEndPoint(IPAddress.Any, int.Parse(Configuration.getConfig["wsPort"]));
                 SkServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
                 SkServer.Bind(ipe);
                 SkServer.Listen(3);
@@ -71,69 +75,55 @@ namespace _SPEED__EWalletSample
 
         private void btnGenQr_Click(object sender, EventArgs e)
         {
-            txtStatus.Visible = false;
-            txtStatus.ForeColor = System.Drawing.SystemColors.ControlText;
-            Transact = txtTransact.Text != "" ? txtTransact.Text : Guid.NewGuid().ToString();
-            Amount = txtAmount.Text;
-            Descript = txtDescript.Text;
+            wbQRCode.Focus();
 
-            switch (indexWallet)
+            switch (cbWallet.SelectedIndex)
             {
-
                 case 0:
-                    {
-                        CreateSaleMomo();
-                        return;
-                    }
-
+                    MethodPay = PaymentMethod.Momo;
+                    break;
                 case 1:
-                    {
-                        CreateSaleVNPay();
-                        return;
-                    }
+                    MethodPay = PaymentMethod.VNPay;
+                    break;
+                case 2:
+                    MethodPay = PaymentMethod.ZaloPay;
+                    break;
             }
-        }
 
-        #region MOMO
-        private void CreateSaleMomo()
-        {
+
+            Transact = txtTransact.Text != "" ? txtTransact.Text : Guid.NewGuid().ToString().Substring(0, 10).Replace("-", "") + "-" + DateTime.Now.ToString("yyyyMMddhhmmss");
+            Amount = txtAmount.Text;
+
+
+            QrRequest _QrRequest = new QrRequest()
+            {
+                amount = Convert.ToInt32(Amount),
+                bankCode = Configuration.getConfig["bankCode"],
+                language = Configuration.getConfig["language"],
+                paygate = MethodPay,
+                paygateCode = Configuration.getConfig["" + MethodPay + "PayCode"],
+                orderId = Transact,
+                orderInfo = Transact,
+                paygateMethod = Configuration.getConfig["paygateMethod"],
+                identifier = Configuration.getConfig["identifier"],
+                authMethod = "sha256",
+            };
+
+            string rawHash = "amount=" + Amount + "&authMethod=" + _QrRequest.authMethod + "&bankCode=" + _QrRequest.bankCode + "&identifier=" + _QrRequest.identifier + "&language=" + _QrRequest.language + "&orderId=" + Transact + "&paygate=" + _QrRequest.paygate + "&paygateCode=" + _QrRequest.paygateCode + "&paygateMethod=" + _QrRequest.paygateMethod + "";
+            _QrRequest.secureHash = HMACSHA256(rawHash, Configuration.getConfig["secretKey"]);
+
             try
             {
-
-                MomoConfig _Config = Newtonsoft.Json.JsonConvert.DeserializeObject<MomoConfig>(Configuration.getConfig["Momo"]);
-                MomoRequestQr _MomoRequestQr = new MomoRequestQr()
-                {
-                    partnerCode = _Config.partnerCode,
-                    partnerName = "Speed",
-                    storeId = "1",
-                    requestId = Transact != "" ? Transact : Guid.NewGuid().ToString(),
-                    amount = Amount,
-                    orderId = Transact != "" ? Transact : Guid.NewGuid().ToString(),
-                    orderInfo = Descript != "" ? Descript : "Speed Payment",
-                    redirectUrl = "https://momo.vn",
-                    ipnUrl = "https://momo.vn",
-                    autoCapture = true,
-                    requestType = "captureWallet",
-                    extraData = "",
-                    lang = "en"
-                };
-
-                string rawHash = "accessKey=" + _Config.accessKey +
-                "&amount=" + _MomoRequestQr.amount +
-                "&extraData=" + _MomoRequestQr.extraData +
-                "&ipnUrl=" + _MomoRequestQr.ipnUrl +
-                "&orderId=" + _MomoRequestQr.orderId +
-                "&orderInfo=" + _MomoRequestQr.orderInfo +
-                "&partnerCode=" + _MomoRequestQr.partnerCode +
-                "&redirectUrl=" + _MomoRequestQr.redirectUrl +
-                "&requestId=" + _MomoRequestQr.requestId +
-                "&requestType=" + _MomoRequestQr.requestType;
-                _MomoRequestQr.signature = HMACSHA256(rawHash, _Config.secretkey);
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(_Config.sandbox + "/v2/gateway/api/create");
-
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(Configuration.getConfig["url"] + "/crv/payment/create");
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
-                string strBody = Newtonsoft.Json.JsonConvert.SerializeObject(_MomoRequestQr);
+
+                System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate(object sd, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+
+
+                string strBody = Newtonsoft.Json.JsonConvert.SerializeObject(_QrRequest);
                 txtRequest.Text = strBody.ToString();
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
@@ -143,13 +133,11 @@ namespace _SPEED__EWalletSample
                 using (var srPayPos = new StreamReader(httpResponse.GetResponseStream()))
                 {
 
-                    MomoResponseQr MomoResponseQr = Newtonsoft.Json.JsonConvert.DeserializeObject<MomoResponseQr>(srPayPos.ReadToEnd());
-                    txtResponse.Text = Newtonsoft.Json.JsonConvert.SerializeObject(MomoResponseQr);
-                    if (MomoResponseQr.resultCode == 0)
+                    ResultResponse _ResultResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ResultResponse>(srPayPos.ReadToEnd());
+                    txtResponse.Text = Newtonsoft.Json.JsonConvert.SerializeObject(_ResultResponse);
+                    if (_ResultResponse.status == "00")
                     {
-                        GenerateQr(MomoResponseQr.qrCodeUrl);
-                        countInv = Convert.ToInt32(Configuration.getConfig["TimeCheck"]);
-                        tmrCountDown.Start();
+                        GenerateQr(_ResultResponse.data.paymentLink);
                     }
 
                 }
@@ -162,33 +150,68 @@ namespace _SPEED__EWalletSample
             {
                 wbQRCode.Focus();
             }
+
         }
 
-        private void CheckStatusMomo()
+        private void btnRefund_Click(object sender, EventArgs e)
         {
+            wbQRCode.Navigate(Application.StartupPath + "\\QRCode\\index.html");
+
+            if (txtTransact.Text == "")
+            {
+                MessageBox.Show("Please enter Transact#");
+                return;
+            }
+
+            if (txtAmount.Text == "")
+            {
+                MessageBox.Show("Please enter Amount");
+                return;
+            }
+
+            switch (cbWallet.SelectedIndex)
+            {
+                case 0:
+                    MethodPay = PaymentMethod.Momo;
+                    break;
+                case 1:
+                    MethodPay = PaymentMethod.VNPay;
+                    break;
+                case 2:
+                    MethodPay = PaymentMethod.ZaloPay;
+                    break;
+            }
+
+
+            Transact = txtTransact.Text;
+            Amount = txtAmount.Text;
+
+
+            RefundRequest _RefundRequest = new RefundRequest()
+            {
+                amount = Convert.ToInt32(Amount),
+                paygate = MethodPay,
+                paygateCode = Configuration.getConfig["" + MethodPay + "PayCode"],
+                orderId = Transact,
+                identifier = Configuration.getConfig["identifier"],
+                authMethod = "sha256",
+            };
+
+            string rawHash = "amount=" + Amount + "&authMethod=" + _RefundRequest.authMethod + "&identifier=" + _RefundRequest.identifier + "&orderId=" + Transact + "&paygate=" + _RefundRequest.paygate + "&paygateCode=" + _RefundRequest.paygateCode + "";
+            _RefundRequest.secureHash = HMACSHA256(rawHash, Configuration.getConfig["secretKey"]);
+
             try
             {
-
-                MomoConfig _Config = Newtonsoft.Json.JsonConvert.DeserializeObject<MomoConfig>(Configuration.getConfig["Momo"]);
-                MomoRequestQr _MomoRequestQr = new MomoRequestQr()
-                {
-                    partnerCode = _Config.partnerCode,
-                    requestId = Transact != "" ? Transact : Guid.NewGuid().ToString(),
-                    orderId = Transact != "" ? Transact : Guid.NewGuid().ToString(),
-                    lang = "en"
-                };
-
-                string rawHash = "accessKey=" + _Config.accessKey +
-                "&orderId=" + _MomoRequestQr.orderId +
-                "&partnerCode=" + _MomoRequestQr.partnerCode +
-                "&requestId=" + _MomoRequestQr.requestId;
-
-                _MomoRequestQr.signature = HMACSHA256(rawHash, _Config.secretkey);
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(_Config.sandbox + "/v2/gateway/api/query");
-
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(Configuration.getConfig["url"] + "/crv/payment/refund");
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
-                string strBody = Newtonsoft.Json.JsonConvert.SerializeObject(_MomoRequestQr);
+
+                System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate(object sd, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+
+
+                string strBody = Newtonsoft.Json.JsonConvert.SerializeObject(_RefundRequest);
                 txtRequest.Text = strBody.ToString();
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
@@ -198,153 +221,69 @@ namespace _SPEED__EWalletSample
                 using (var srPayPos = new StreamReader(httpResponse.GetResponseStream()))
                 {
 
-                    MomoResponseQr MomoResponseQr = Newtonsoft.Json.JsonConvert.DeserializeObject<MomoResponseQr>(srPayPos.ReadToEnd());
-                    txtResponse.Text = Newtonsoft.Json.JsonConvert.SerializeObject(MomoResponseQr);
-                    txtStatus.Text = MomoResponseQr.message;
-                    if (MomoResponseQr.resultCode == 0)
-                    {
-                        wbQRCode.Navigate(Application.StartupPath + "\\QRCode\\success.html");
-                        txtStatus.ForeColor = System.Drawing.Color.Green;
-                        txtStatus.Text = "                 Payment success";
-                        tmrCountDown.Stop();
-                    }
-                    else
-                    {
-                        countInv = Convert.ToInt32(Configuration.getConfig["TimeCheck"]);
-                        tmrCountDown.Start();
-                    }
+                    ResultResponse _ResultResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ResultResponse>(srPayPos.ReadToEnd());
+                    txtResponse.Text = Newtonsoft.Json.JsonConvert.SerializeObject(_ResultResponse);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
-        #endregion
-
-
-        #region VNPay
-        private void CreateSaleVNPay()
+        private void btnCheck_Click(object sender, EventArgs e)
         {
+            wbQRCode.Navigate(Application.StartupPath + "\\QRCode\\index.html");
+            if (txtTransact.Text == "")
+            {
+                MessageBox.Show("Please enter Transact#");
+                return;
+            }
+
+         
+            switch (cbWallet.SelectedIndex)
+            {
+                case 0:
+                    MethodPay = PaymentMethod.Momo;
+                    break;
+                case 1:
+                    MethodPay = PaymentMethod.VNPay;
+                    break;
+                case 2:
+                    MethodPay = PaymentMethod.ZaloPay;
+                    break;
+            }
+
+
+            Transact = txtTransact.Text;
+
+
+
+            CheckStatusRequest _CheckStatusRequest = new CheckStatusRequest()
+            {
+               
+                paygate = MethodPay,
+                paygateCode = Configuration.getConfig["" + MethodPay + "PayCode"],
+                orderId = Transact,
+                identifier = Configuration.getConfig["identifier"],
+                authMethod = "sha256",
+            };
+
+            string rawHash = "authMethod=" + _CheckStatusRequest.authMethod + "&identifier=" + _CheckStatusRequest.identifier + "&orderId=" + Transact + "&paygate=" + _CheckStatusRequest.paygate + "&paygateCode=" + _CheckStatusRequest.paygateCode + "";
+            _CheckStatusRequest.secureHash = HMACSHA256(rawHash, Configuration.getConfig["secretKey"]);
+
             try
             {
-
-                VNPayConfig _Config = Newtonsoft.Json.JsonConvert.DeserializeObject<VNPayConfig>(Configuration.getConfig["VNPay"]);
-
-                VNPayRequestQr _VNPayRequestQr = new VNPayRequestQr()
-                {
-                    appId = _Config.appId,
-                    merchantName = _Config.merchantName,
-                    serviceCode = _Config.serviceCode,
-                    countryCode = _Config.countryCode,
-                    masterMerCode = _Config.masterMerCode,
-                    merchantType = _Config.merchantType,
-                    merchantCode = _Config.merchantCode,
-                    payloadFormat = null,
-                    terminalId = _Config.terminalId,
-                    payType = _Config.payType,
-                    productId = _Config.productId,
-                    productName = null,
-                    imageName = null,
-                    txnId = Transact,
-                    amount = Amount,
-                    tipAndFee = "",
-                    ccy = _Config.ccy,
-                    expDate = DateTime.Now.AddMinutes(int.Parse(_Config.expMin)).ToString("yyMMddHHmm"),
-                    desc = Descript,
-                    merchantCity = null,
-                    merchantCC = null,
-                    fixedFee = null,
-                    percentageFee = null,
-                    pinCode = null,
-                    mobile = null,
-                    billNumber = Transact,
-                    creator = null,
-                    consumerID = null,
-                    purpose = ""
-                };
-
-                string rawHash = _VNPayRequestQr.appId + "|" +
-                    _VNPayRequestQr.merchantName + "|" +
-                    _VNPayRequestQr.serviceCode + "|" +
-                    _VNPayRequestQr.countryCode + "|" +
-                    _VNPayRequestQr.masterMerCode + "|" +
-                    _VNPayRequestQr.merchantType + "|" +
-                    _VNPayRequestQr.merchantCode + "|" +
-                    _VNPayRequestQr.terminalId + "|" +
-                    _VNPayRequestQr.payType + "|" +
-                    _VNPayRequestQr.productId + "|" +
-                    _VNPayRequestQr.txnId + @"|" +
-                    _VNPayRequestQr.amount + @"||" +
-                    _VNPayRequestQr.ccy + "|" +
-                    _VNPayRequestQr.expDate + "|" +
-                    _Config.createQrcodeSecretKey;
-
-                _VNPayRequestQr.checksum = CreateMD5(rawHash);
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(_Config.url + "/QRCreateAPIRestV2/rest/CreateQrcodeApi/createQrcode");
-
-                httpWebRequest.ContentType = "text/plain";
-                httpWebRequest.Method = "POST";
-                string strBody = Newtonsoft.Json.JsonConvert.SerializeObject(_VNPayRequestQr);
-                txtRequest.Text = strBody.ToString();
-                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-                {
-                    streamWriter.Write(strBody);
-                }
-                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                using (var srPayPos = new StreamReader(httpResponse.GetResponseStream()))
-                {
-
-                    VNPayResponseQr VNPayResponseQr = Newtonsoft.Json.JsonConvert.DeserializeObject<VNPayResponseQr>(srPayPos.ReadToEnd());
-                    txtResponse.Text = Newtonsoft.Json.JsonConvert.SerializeObject(VNPayResponseQr);
-                    if (VNPayResponseQr.code == "00")
-                    {
-                        GenerateQr(VNPayResponseQr.data);
-                        countInv = Convert.ToInt32(Configuration.getConfig["TimeCheck"]);
-                        tmrCountDown.Start();
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                wbQRCode.Focus();
-            }
-        }
-
-        private void CheckStatusVNPay()
-        {
-            try
-            {
-                VNPayConfig _Config = Newtonsoft.Json.JsonConvert.DeserializeObject<VNPayConfig>(Configuration.getConfig["VNPay"]);
-
-                VNPayRequestCheckTrans _VNPayRequestCheckTrans = new VNPayRequestCheckTrans()
-                {
-                    txnId = Transact,
-                    merchantCode = _Config.merchantCode,
-                    terminalID = _Config.terminalId,
-                    payDate = DateTime.Now.ToString("dd/MM/yyyy"),
-
-                };
-
-                string rawHash = _VNPayRequestCheckTrans.payDate + "|" +
-                    _VNPayRequestCheckTrans.txnId + "|" +
-                    _VNPayRequestCheckTrans.merchantCode + "|" +
-                    _VNPayRequestCheckTrans.terminalID + "|" +
-                    _Config.checkTransactionSecretKey;
-
-                _VNPayRequestCheckTrans.checkSum = CreateMD5(rawHash);
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(_Config.url + "/CheckTransaction/rest/api/CheckTrans");
-
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(Configuration.getConfig["url"] + "/crv/payment/status");
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
-                string strBody = Newtonsoft.Json.JsonConvert.SerializeObject(_VNPayRequestCheckTrans);
+
+                System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate(object sd, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+
+
+                string strBody = Newtonsoft.Json.JsonConvert.SerializeObject(_CheckStatusRequest);
                 txtRequest.Text = strBody.ToString();
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
@@ -354,98 +293,33 @@ namespace _SPEED__EWalletSample
                 using (var srPayPos = new StreamReader(httpResponse.GetResponseStream()))
                 {
 
-                    VNPayResponseQr VNPayResponseQr = Newtonsoft.Json.JsonConvert.DeserializeObject<VNPayResponseQr>(srPayPos.ReadToEnd());
-                    txtResponse.Text = Newtonsoft.Json.JsonConvert.SerializeObject(VNPayResponseQr);
-                    txtStatus.Text = VNPayResponseQr.message;
-                    if (VNPayResponseQr.code == "00")
-                    {
-                        wbQRCode.Navigate(Application.StartupPath + "\\QRCode\\success.html");
-                        txtStatus.ForeColor = System.Drawing.Color.Green;
-                        txtStatus.Text = "                 Payment success";
-                        tmrCountDown.Stop();
-                    }
-                    else
-                    {
-                        countInv = Convert.ToInt32(Configuration.getConfig["TimeCheck"]);
-                        tmrCountDown.Start();
-                    }
-
+                    ResultResponse _ResultResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ResultResponse>(srPayPos.ReadToEnd());
+                    txtResponse.Text = Newtonsoft.Json.JsonConvert.SerializeObject(_ResultResponse);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
-
-        #endregion
-
-        private void tmrCountDown_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                txtStatus.Visible = true;
-                txtStatus.Text = "Transactions will be checked after " + countInv + "s";
-                if (countInv <= 0)
-                {
-                    try
-                    {
-                        switch (indexWallet)
-                        {
-
-                            case 0:
-                                {
-                                    CheckStatusMomo();
-                                    return;
-                                }
-
-                            case 1:
-                                {
-                                    CheckStatusVNPay();
-                                    return;
-                                }
-
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                        return;
-                    }
-                }
-                else
-                {
-                    countInv = countInv - 1;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-
 
         private void GenerateQr(string _Content)
         {
             string imgSrc = "";
 
             QRCodeGenerator qrGenertor = new QRCodeGenerator();
-            QRCodeData qrData = qrGenertor.CreateQrCode(_Content, (QRCodeGenerator.ECCLevel)int.Parse(Configuration.getConfig["ECCLevel"]));
+            QRCodeData qrData = qrGenertor.CreateQrCode(_Content, (QRCodeGenerator.ECCLevel)int.Parse(Configuration.getConfig["eccLevel"]));
 
             QRCode qrCode = new QRCode(qrData);
 
-            bmQR = qrCode.GetGraphic(int.Parse(Configuration.getConfig["PixelsPerModule"]), Color.Black, Color.White, null, 0, 6, false);
+            bmQR = qrCode.GetGraphic(int.Parse(Configuration.getConfig["pixelsPerModule"]), Color.Black, Color.White, null, 0, 6, false);
 
-            Bitmap bmQRLogo = qrCode.GetGraphic(int.Parse(Configuration.getConfig["PixelsPerModule"]), Color.Black, Color.White, GetIconBitmap(Application.StartupPath + "\\" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Name + @".png"), int.Parse(Configuration.getConfig["QRLogoSize"]), 1, false);
+            Bitmap bmQRLogo = qrCode.GetGraphic(int.Parse(Configuration.getConfig["pixelsPerModule"]), Color.Black, Color.White, GetIconBitmap(Application.StartupPath + "\\" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Name + @".png"), int.Parse(Configuration.getConfig["qrLogoSize"]), 1, false);
 
             MemoryStream ms = new MemoryStream();
 
-            if (bmQRLogo.Size.Width > int.Parse(Configuration.getConfig["ResizeMax"]))
-                new Bitmap(bmQRLogo, int.Parse(Configuration.getConfig["ResizeMax"]), int.Parse(Configuration.getConfig["ResizeMax"])).Save(ms, ImageFormat.Png);
+            if (bmQRLogo.Size.Width > int.Parse(Configuration.getConfig["resizeMax"]))
+                new Bitmap(bmQRLogo, int.Parse(Configuration.getConfig["resizeMax"]), int.Parse(Configuration.getConfig["resizeMax"])).Save(ms, ImageFormat.Png);
             else
                 bmQRLogo.Save(ms, ImageFormat.Png);
             byte[] byteImage = ms.ToArray();
@@ -711,18 +585,18 @@ namespace _SPEED__EWalletSample
 
         private void button2_Click(object sender, EventArgs e)
         {
-            txtTransact.Text = Guid.NewGuid().ToString();
+            txtTransact.Text = Guid.NewGuid().ToString().Substring(0, 10).Replace("-", "") + "-" + DateTime.Now.ToString("yyyyMMddhhmmss");
         }
 
         private void cbWallet_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (indexWallet != cbWallet.SelectedIndex)
             {
-                indexWallet = cbWallet.SelectedIndex;
-                tmrCountDown.Stop();
                 wbQRCode.Navigate(Application.StartupPath + "\\QRCode\\index.html");
             }
         }
+
+
 
     }
 }

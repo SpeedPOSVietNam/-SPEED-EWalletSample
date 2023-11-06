@@ -2,32 +2,50 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="_SPEED__EWalletSample.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Momo" Type="System.String" Scope="User">
-      <Value Profile="(Default)">{"sandbox":"https://test-payment.momo.vn","production":"https://payment.momo.vn","partnerCode":"MOMO","accessKey":"F8BBA842ECF85","secretkey":"K951B6PE1waDMi640xX08PD3vg6EkVlz"}</Value>
+    <Setting Name="bankCode" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="VNPay" Type="System.String" Scope="User">
-      <Value Profile="(Default)">{"url":"http://14.160.87.123:18080","createQrcodeSecretKey":"vnpay@MERCHANT","checkTransactionSecretKey":"vnpay@123","appId":"MERCHANT","merchantName":"VNPAYQRTEST","serviceCode":"03","countryCode":"VN","masterMerCode":"A000000775","merchantType":"0742","merchantCode":"VNPAYQR117","terminalId":"VNPAYQR2","payType":"03","ccy":"704","expMin":"30","productId":""}</Value>
+    <Setting Name="language" Type="System.String" Scope="User">
+      <Value Profile="(Default)">en</Value>
     </Setting>
-    <Setting Name="ZaloPay" Type="System.String" Scope="User">
-      <Value Profile="(Default)">{"url":"https://sandbox.zalopay.com.vn","appId":"15062","macKey":"qk3f6zw5bbyCeP3Chp47SS1ZRiO0Vuyn","callbackKey":"fNfVlVR9AzjMrrkUSXuGorWZVSUwrGIQ","rsaKey":"PFJTQUtleVZhbHVlPjxNb2R1bHVzPmpwakV4bW1nQzI3Q3RtdlJKTWRYTW5WSzhaTjNSRjlGYmxEdUpCQ2lDWWVobFJGM08wSnNsMEQrREU5OFBsbThiZFcwVFFYNHJFWnhNTlhUWjBTQTdRPT08L01vZHVsdXM+PEV4cG9uZW50PkFRQUI8L0V4cG9uZW50PjwvUlNBS2V5VmFsdWU+"}</Value>
-    </Setting>
-    <Setting Name="WSPort" Type="System.String" Scope="User">
+    <Setting Name="wsPort" Type="System.String" Scope="User">
       <Value Profile="(Default)">9000</Value>
     </Setting>
-    <Setting Name="ECCLevel" Type="System.String" Scope="User">
+    <Setting Name="eccLevel" Type="System.String" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="QRLogoSize" Type="System.String" Scope="User">
+    <Setting Name="qrLogoSize" Type="System.String" Scope="User">
       <Value Profile="(Default)">32</Value>
     </Setting>
-    <Setting Name="PixelsPerModule" Type="System.String" Scope="User">
+    <Setting Name="pixelsPerModule" Type="System.String" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
-    <Setting Name="ResizeMax" Type="System.String" Scope="User">
+    <Setting Name="resizeMax" Type="System.String" Scope="User">
       <Value Profile="(Default)">200</Value>
     </Setting>
-    <Setting Name="TimeCheck" Type="System.String" Scope="User">
-      <Value Profile="(Default)">3</Value>
+    <Setting Name="zalopayPayCode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2839</Value>
+    </Setting>
+    <Setting Name="vnpayPayCode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">VNPAY_TEST</Value>
+    </Setting>
+    <Setting Name="momoPayCode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">MOMO77C020230530</Value>
+    </Setting>
+    <Setting Name="identifier" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sco-project-user-01</Value>
+    </Setting>
+    <Setting Name="authMethod" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sha256</Value>
+    </Setting>
+    <Setting Name="paygateMethod" Type="System.String" Scope="User">
+      <Value Profile="(Default)">qr</Value>
+    </Setting>
+    <Setting Name="secretKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">IjsLFBnUnPXLViFJUOPPXgagvVNPfYvL</Value>
+    </Setting>
+    <Setting Name="url" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://qas.centralretail.com.vn</Value>
     </Setting>
   </Settings>
 </SettingsFile>

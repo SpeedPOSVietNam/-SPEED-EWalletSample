@@ -1,4 +1,5 @@
 ﻿using _SPEED__EWalletSample.Models;
+using Microsoft.AspNetCore.SignalR.Client;
 using QRCoder;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,9 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace _SPEED__EWalletSample
 {
@@ -26,6 +29,9 @@ namespace _SPEED__EWalletSample
         Thread ThrBeginAccept;
         IPEndPoint ipe;
         List<Socket> lstSkClient = new List<Socket>();
+
+        private HubConnection hubConnection;
+
         bool isClientConnect = true;
         bool isAccept = false, isReceive = false;
         bool isRunning = false;
@@ -41,38 +47,85 @@ namespace _SPEED__EWalletSample
             InitializeComponent();
             wbQRCode.Navigate(Application.StartupPath + "\\QRCode\\index.html");
             ((Control)wbQRCode).Enabled = false;
+            InitializeSignalR();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-
-            Configuration.InitConfig();
-
-            string[] wallet = { PaymentMethod.Momo.ToString(), PaymentMethod.VNPay.ToString(), PaymentMethod.ZaloPay.ToString() };
-
-            foreach (string item in wallet)
+            try
             {
-                cbWallet.Items.Add(item.ToUpper());
+
+                Configuration.InitConfig();
+
+                string[] wallet = { PaymentMethod.Momo.ToString(), PaymentMethod.VNPay.ToString(), PaymentMethod.ZaloPay.ToString() };
+
+                foreach (string item in wallet)
+                {
+                    cbWallet.Items.Add(item.ToUpper());
+                }
+                cbWallet.SelectedIndex = indexWallet;
+
+               
+
+                if (!isRunning)
+                {
+                    isAccept = true;
+                    isReceive = true;
+                    ipe = new IPEndPoint(IPAddress.Any, int.Parse(Configuration.getConfig["wsPort"]));
+                    SkServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
+                    SkServer.Bind(ipe);
+                    SkServer.Listen(3);
+                    isRunning = true;
+                    ThrBeginAccept = new Thread(new ThreadStart(BeginAccept));
+                    ThrBeginAccept.IsBackground = true;
+                    ThrBeginAccept.Start();
+                }
+
+
             }
-            cbWallet.SelectedIndex = indexWallet;
-
-            if (!isRunning)
+            catch (Exception ex)
             {
-                isAccept = true;
-                isReceive = true;
-                ipe = new IPEndPoint(IPAddress.Any, int.Parse(Configuration.getConfig["wsPort"]));
-                SkServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
-                SkServer.Bind(ipe);
-                SkServer.Listen(3);
-                isRunning = true;
-                ThrBeginAccept = new Thread(new ThreadStart(BeginAccept));
-                ThrBeginAccept.IsBackground = true;
-                ThrBeginAccept.Start();
+                MessageBox.Show(ex.Message);
             }
         }
 
+        private async void InitializeSignalR()
+        {
+
+           
+            string serverUrl = "https://crv.speedtech.vn/notifyHub"; 
+
+            hubConnection = new HubConnectionBuilder()
+               .WithUrl(serverUrl)
+               .Build();
+
+            hubConnection.On<string>("ReceiveStatus", (message) =>
+            {
+                this.Invoke((Action)delegate
+                {
+                    txtStatus.Text += "[" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "]: " + message;
+                    txtStatus.Text += "\n";
+                });
+            });
 
 
+            hubConnection.Closed += async (error) =>
+            {
+                await Task.Delay(10 * 1000);
+                await hubConnection.StartAsync();
+            };
+
+            try
+            {
+                await hubConnection.StartAsync();
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
         private void btnGenQr_Click(object sender, EventArgs e)
         {
             wbQRCode.Focus();
@@ -240,7 +293,7 @@ namespace _SPEED__EWalletSample
                 return;
             }
 
-         
+
             switch (cbWallet.SelectedIndex)
             {
                 case 0:
@@ -261,7 +314,7 @@ namespace _SPEED__EWalletSample
 
             CheckStatusRequest _CheckStatusRequest = new CheckStatusRequest()
             {
-               
+
                 paygate = MethodPay,
                 paygateCode = Configuration.getConfig["" + MethodPay + "PayCode"],
                 orderId = Transact,

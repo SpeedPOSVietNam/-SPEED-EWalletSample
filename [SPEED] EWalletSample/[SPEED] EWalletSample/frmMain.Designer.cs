@@ -46,6 +46,8 @@
             this.tmrCountDown = new System.Windows.Forms.Timer(this.components);
             this.btnCheck = new System.Windows.Forms.Button();
             this.btnRefund = new System.Windows.Forms.Button();
+            this.txtStatus = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // wbQRCode
@@ -125,7 +127,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(29, 227);
+            this.label5.Location = new System.Drawing.Point(28, 350);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 17);
             this.label5.TabIndex = 12;
@@ -133,7 +135,7 @@
             // 
             // txtRequest
             // 
-            this.txtRequest.Location = new System.Drawing.Point(96, 227);
+            this.txtRequest.Location = new System.Drawing.Point(95, 350);
             this.txtRequest.Multiline = true;
             this.txtRequest.Name = "txtRequest";
             this.txtRequest.Size = new System.Drawing.Size(562, 116);
@@ -141,7 +143,7 @@
             // 
             // txtResponse
             // 
-            this.txtResponse.Location = new System.Drawing.Point(96, 360);
+            this.txtResponse.Location = new System.Drawing.Point(95, 483);
             this.txtResponse.Multiline = true;
             this.txtResponse.Name = "txtResponse";
             this.txtResponse.Size = new System.Drawing.Size(562, 122);
@@ -150,7 +152,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 360);
+            this.label6.Location = new System.Drawing.Point(17, 483);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(72, 17);
             this.label6.TabIndex = 14;
@@ -186,11 +188,30 @@
             this.btnRefund.UseVisualStyleBackColor = true;
             this.btnRefund.Click += new System.EventHandler(this.btnRefund_Click);
             // 
+            // txtStatus
+            // 
+            this.txtStatus.Location = new System.Drawing.Point(95, 218);
+            this.txtStatus.Multiline = true;
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(562, 116);
+            this.txtStatus.TabIndex = 21;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(59, 218);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(30, 17);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "IPN";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(670, 494);
+            this.ClientSize = new System.Drawing.Size(670, 614);
+            this.Controls.Add(this.txtStatus);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnRefund);
             this.Controls.Add(this.btnCheck);
             this.Controls.Add(this.button2);
@@ -233,6 +254,8 @@
         private System.Windows.Forms.Timer tmrCountDown;
         private System.Windows.Forms.Button btnCheck;
         private System.Windows.Forms.Button btnRefund;
+        private System.Windows.Forms.TextBox txtStatus;
+        private System.Windows.Forms.Label label4;
     }
 }
 

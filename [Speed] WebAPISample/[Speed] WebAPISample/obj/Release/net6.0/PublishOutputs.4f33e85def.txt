@@ -1,0 +1,12 @@
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Release\net6.0\PubTmp\Out\[Speed] WebAPISample.exe
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Release\net6.0\PubTmp\Out\appsettings.json
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Release\net6.0\PubTmp\Out\[Speed] WebAPISample.dll
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Release\net6.0\PubTmp\Out\[Speed] WebAPISample.deps.json
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Release\net6.0\PubTmp\Out\[Speed] WebAPISample.runtimeconfig.json
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Release\net6.0\PubTmp\Out\[Speed] WebAPISample.pdb
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Release\net6.0\PubTmp\Out\Microsoft.OpenApi.dll
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Release\net6.0\PubTmp\Out\Newtonsoft.Json.dll
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll

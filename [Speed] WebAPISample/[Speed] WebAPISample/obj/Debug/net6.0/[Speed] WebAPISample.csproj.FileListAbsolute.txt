@@ -1,0 +1,33 @@
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\bin\Debug\net6.0\appsettings.json
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\bin\Debug\net6.0\[Speed] WebAPISample.exe
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\bin\Debug\net6.0\[Speed] WebAPISample.deps.json
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\bin\Debug\net6.0\[Speed] WebAPISample.runtimeconfig.json
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\bin\Debug\net6.0\[Speed] WebAPISample.dll
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\bin\Debug\net6.0\[Speed] WebAPISample.pdb
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\[Speed] WebAPISample.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\[Speed] WebAPISample.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\[Speed] WebAPISample.AssemblyInfoInputs.cache
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\[Speed] WebAPISample.AssemblyInfo.cs
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\[Speed] WebAPISample.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\[Speed] WebAPISample.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\[Speed] WebAPISample.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\staticwebassets\msbuild.[Speed] WebAPISample.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\staticwebassets\msbuild.build.[Speed] WebAPISample.props
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.[Speed] WebAPISample.props
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.[Speed] WebAPISample.props
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\scopedcss\bundle\[Speed] WebAPISample.styles.css
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\[Speed] WebAPISample.csproj.CopyComplete
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\[Speed] WebAPISample.dll
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\refint\[Speed] WebAPISample.dll
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\[Speed] WebAPISample.pdb
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\[Speed] WebAPISample.genruntimeconfig.cache
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\obj\Debug\net6.0\ref\[Speed] WebAPISample.dll
+C:\Users\Administrator\source\repos\[Speed] WebAPISample\[Speed] WebAPISample\bin\Debug\net6.0\Newtonsoft.Json.dll

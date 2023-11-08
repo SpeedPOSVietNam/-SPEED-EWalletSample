@@ -9,3 +9,67 @@ D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\obj\Debug\[SPEE
 D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\[SPEED] EWalletSample.exe.config
 D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Newtonsoft.Json.dll
 D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\QRCoder.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\[SPEED] EWalletSample.exe.config
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\obj\Debug\[SPEED] EWalletSample.exe
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\obj\Debug\[SPEED] EWalletSample.pdb
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\[SPEED] EWalletSample.exe
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\[SPEED] EWalletSample.pdb
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Newtonsoft.Json.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\obj\Debug\_SPEED__EWalletSample.frmMain.resources
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\obj\Debug\_SPEED__EWalletSample.Properties.Resources.resources
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\obj\Debug\[SPEED] EWalletSample.csproj.GenerateResource.Cache
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.AspNetCore.Connections.Abstractions.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.AspNetCore.Http.Connections.Client.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.AspNetCore.Http.Connections.Common.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.AspNetCore.SignalR.Client.Core.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.AspNetCore.SignalR.Client.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.AspNetCore.SignalR.Common.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.Extensions.Features.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.Extensions.Logging.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.Extensions.Options.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.Extensions.Primitives.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Buffers.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.IO.Pipelines.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Memory.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Numerics.Vectors.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Text.Encodings.Web.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Text.Json.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Threading.Channels.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.ValueTuple.dll
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.AspNetCore.Connections.Abstractions.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.AspNetCore.Http.Connections.Client.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.AspNetCore.Http.Connections.Common.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.AspNetCore.SignalR.Client.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.AspNetCore.SignalR.Client.Core.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.AspNetCore.SignalR.Common.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.AspNetCore.SignalR.Protocols.Json.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.Extensions.Features.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.Extensions.Logging.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.Extensions.Options.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\Microsoft.Extensions.Primitives.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Buffers.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.IO.Pipelines.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Memory.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Numerics.Vectors.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Text.Encodings.Web.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Text.Json.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Threading.Channels.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\bin\Debug\System.ValueTuple.xml
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\obj\Debug\[SPEED] EWalletSample.csproj.AssemblyReference.cache
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\obj\Debug\[SPEED] EWalletSample.csproj.CoreCompileInputs.cache
+D:\A - SPEED PROJECT\[SPEED] EWalletSample\[SPEED] EWalletSample\[SPEED] EWalletSample\obj\Debug\[SPEED] EWalletSample.csproj.CopyComplete

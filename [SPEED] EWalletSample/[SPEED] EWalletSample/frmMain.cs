@@ -47,7 +47,7 @@ namespace _SPEED__EWalletSample
             InitializeComponent();
             wbQRCode.Navigate(Application.StartupPath + "\\QRCode\\index.html");
             ((Control)wbQRCode).Enabled = false;
-            InitializeSignalR();
+           
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -57,6 +57,7 @@ namespace _SPEED__EWalletSample
 
                 Configuration.InitConfig();
 
+                InitializeSignalR();
                 string[] wallet = { PaymentMethod.Momo.ToString(), PaymentMethod.VNPay.ToString(), PaymentMethod.ZaloPay.ToString() };
 
                 foreach (string item in wallet)
@@ -65,7 +66,7 @@ namespace _SPEED__EWalletSample
                 }
                 cbWallet.SelectedIndex = indexWallet;
 
-               
+
 
                 if (!isRunning)
                 {
@@ -89,25 +90,34 @@ namespace _SPEED__EWalletSample
             }
         }
 
+        private async void OnReceiveStatusSignalR()
+        {
+            try
+            {
+                hubConnection.On<string>(Transact, (message) =>
+                {
+
+                    this.Invoke((Action)delegate
+                    {
+                        VerifyMessage(message);
+                       
+                    });
+                });
+            }
+            catch (Exception ex) { 
+            MessageBox.Show(ex.Message);
+            }
+        }
+
+
         private async void InitializeSignalR()
         {
+            string serverUrl = Configuration.getConfig["hostApi"] + "/notifyHub";
 
-           
-            string serverUrl = "https://crv.speedtech.vn/notifyHub"; 
 
             hubConnection = new HubConnectionBuilder()
                .WithUrl(serverUrl)
                .Build();
-
-            hubConnection.On<string>("ReceiveStatus", (message) =>
-            {
-                this.Invoke((Action)delegate
-                {
-                    txtStatus.Text += "[" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "]: " + message;
-                    txtStatus.Text += "\n";
-                });
-            });
-
 
             hubConnection.Closed += async (error) =>
             {
@@ -118,12 +128,13 @@ namespace _SPEED__EWalletSample
             try
             {
                 await hubConnection.StartAsync();
-
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
+            }
+            finally { 
+            
             }
         }
         private void btnGenQr_Click(object sender, EventArgs e)
@@ -173,7 +184,7 @@ namespace _SPEED__EWalletSample
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
 
-                System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate(object sd, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+                System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate (object sd, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
 
 
                 string strBody = Newtonsoft.Json.JsonConvert.SerializeObject(_QrRequest);
@@ -191,6 +202,7 @@ namespace _SPEED__EWalletSample
                     if (_ResultResponse.status == "00")
                     {
                         GenerateQr(_ResultResponse.data.paymentLink);
+                        OnReceiveStatusSignalR();
                     }
 
                 }
@@ -261,7 +273,7 @@ namespace _SPEED__EWalletSample
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
 
-                System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate(object sd, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+                System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate (object sd, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
 
 
                 string strBody = Newtonsoft.Json.JsonConvert.SerializeObject(_RefundRequest);
@@ -333,7 +345,7 @@ namespace _SPEED__EWalletSample
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
 
-                System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate(object sd, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+                System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate (object sd, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
 
 
                 string strBody = Newtonsoft.Json.JsonConvert.SerializeObject(_CheckStatusRequest);
@@ -564,6 +576,21 @@ namespace _SPEED__EWalletSample
             Pong = 10
         }
 
+        private void VerifyMessage(string Msg)
+        {
+            try
+            {
+                StatusResult _StatusResult = Newtonsoft.Json.JsonConvert.DeserializeObject<StatusResult>(Decrypt(Configuration.getConfig["msgSecretKey"], Msg));
+                if (_StatusResult != null)
+                {
+                    txtStatus.Text += "[" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "]: Order ID: " + _StatusResult.data.orderId + " " + _StatusResult.message;
+                    txtStatus.Text += "\n";
+                }
+            }catch(Exception ex) { 
+            MessageBox.Show(ex.Message);
+            }
+        }
+
         public byte[] GetFrameFromString(string Message, EOpcodeType Opcode = EOpcodeType.Text)
         {
             byte[] response;
@@ -639,6 +666,27 @@ namespace _SPEED__EWalletSample
         private void button2_Click(object sender, EventArgs e)
         {
             txtTransact.Text = Guid.NewGuid().ToString().Substring(0, 10).Replace("-", "") + "-" + DateTime.Now.ToString("yyyyMMddhhmmss");
+        }
+
+
+
+        private string Decrypt(string encryptionKey, string textToDecrypt)
+        {
+            TripleDESCryptoServiceProvider des = new TripleDESCryptoServiceProvider();
+            des.Key = Encoding.ASCII.GetBytes(encryptionKey);
+            des.IV = new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+            byte[] fromByte = StringToByteArray(textToDecrypt);
+            string st = Encoding.ASCII.GetString(fromByte);
+            byte[] stringBytes = Convert.FromBase64String(st);
+            return Encoding.ASCII.GetString(des.CreateDecryptor().TransformFinalBlock(stringBytes, 0, stringBytes.Length));
+        }
+
+        private static byte[] StringToByteArray(string hex)
+        {
+            return Enumerable.Range(0, hex.Length)
+            .Where(x => x % 2 == 0)
+            .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+            .ToArray();
         }
 
         private void cbWallet_SelectedIndexChanged(object sender, EventArgs e)

@@ -10,23 +10,13 @@ namespace _Speed__WebAPISample.Controllers
     [Route("")]
     public class HomeController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
-        //private readonly ILogger<HomeController> _logger;
-
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
-
+        private readonly IConfiguration _configuration;
         private readonly IHubContext<NotificateHub> _hubContext;
 
-        public HomeController(IHubContext<NotificateHub> hubContext)
+        public HomeController(IHubContext<NotificateHub> hubContext, IConfiguration configuration)
         {
             _hubContext = hubContext;
+            _configuration = configuration;
         }
 
         [HttpPost(Name = "")]
@@ -39,20 +29,21 @@ namespace _Speed__WebAPISample.Controllers
                 Payload _Payload = JsonConvert.DeserializeObject<Payload>(_Request.ToString());
                 if (_Payload != null)
                 {
-
                     FunctionHelper.WriteLogs(_Payload.data.orderId, "IPN", Newtonsoft.Json.JsonConvert.SerializeObject(_Payload));
+                    string ipnSecretKey = _configuration.GetValue<string>("IPN_SecretKey");
+                    string msgSecretKey = _configuration.GetValue<string>("MSG_SecretKey");
                     string rawHash = "amount=" + _Payload.data.amount + "&orderId=" + _Payload.data.orderId + "&paygateCode=" + _Payload.data.paygateCode + "&transId=" + _Payload.data.transId + "";
-                    string secureHash = FunctionHelper.HMACSHA256(rawHash, "IjsLFBnUnPXLViFJUOPPXgagvVNPfYvL");
-                    FunctionHelper.WriteLogs(_Payload.data.orderId, "Hash", Newtonsoft.Json.JsonConvert.SerializeObject(secureHash));
-                    
-                    
+                    string secureHash = FunctionHelper.HMACSHA256(rawHash, ipnSecretKey);
+                    string msgEncrypt = FunctionHelper.Encrypt(msgSecretKey, Newtonsoft.Json.JsonConvert.SerializeObject(_Payload));
 
+                    FunctionHelper.WriteLogs(_Payload.data.orderId, "Hash", Newtonsoft.Json.JsonConvert.SerializeObject(secureHash));
+                    FunctionHelper.WriteLogs(_Payload.data.orderId, "Msg", secureHash);
 
                     if (secureHash == _Payload.secureHash)
                     {
                         _Result.success = true;
                         _Result.description = "success";
-                        _hubContext.Clients.All.SendAsync("ReceiveStatus", "orderId: " + _Payload.data.orderId+ " : "+ _Payload.message);
+                        _hubContext.Clients.All.SendAsync(_Payload.data.orderId, msgEncrypt);
                     }
                     else
                     {

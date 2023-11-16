@@ -47,5 +47,11 @@
     <Setting Name="url" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://qas.centralretail.com.vn</Value>
     </Setting>
+    <Setting Name="hostApi" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://crv.speedtech.vn</Value>
+    </Setting>
+    <Setting Name="msgSecretKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2AC6BBCB8FCBCDE69737D6B6</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

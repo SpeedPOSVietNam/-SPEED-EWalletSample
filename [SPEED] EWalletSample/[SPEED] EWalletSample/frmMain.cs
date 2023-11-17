@@ -114,7 +114,6 @@ namespace _SPEED__EWalletSample
         {
             string serverUrl = Configuration.getConfig["hostApi"] + "/notifyHub";
 
-
             hubConnection = new HubConnectionBuilder()
                .WithUrl(serverUrl)
                .Build();
@@ -357,7 +356,7 @@ namespace _SPEED__EWalletSample
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var srPayPos = new StreamReader(httpResponse.GetResponseStream()))
                 {
-
+                    
                     ResultResponse _ResultResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ResultResponse>(srPayPos.ReadToEnd());
                     txtResponse.Text = Newtonsoft.Json.JsonConvert.SerializeObject(_ResultResponse);
                 }
@@ -583,7 +582,8 @@ namespace _SPEED__EWalletSample
                 StatusResult _StatusResult = Newtonsoft.Json.JsonConvert.DeserializeObject<StatusResult>(Decrypt(Configuration.getConfig["msgSecretKey"], Msg));
                 if (_StatusResult != null)
                 {
-                    txtStatus.Text += "[" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "]: Order ID: " + _StatusResult.data.orderId + " " + _StatusResult.message;
+                    //txtStatus.Text += "[" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "]: Order ID: " + _StatusResult.data.orderId + " " + _StatusResult.message;
+                    txtStatus.Text += Newtonsoft.Json.JsonConvert.SerializeObject(_StatusResult);
                     txtStatus.Text += "\n";
                 }
             }catch(Exception ex) { 
